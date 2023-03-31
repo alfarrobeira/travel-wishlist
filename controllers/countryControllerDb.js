@@ -2,9 +2,12 @@ import connPool from "../db/pg.js";
 
 // GET
 const getAllCountries = (req, res) => {
-    const { sort } = req.query;
+    const { sort, visited } = req.query;
     let query = "SELECT * FROM countries";
     
+    if (visited)
+      query += " WHERE visited=true";
+
     if (sort)
     query += " ORDER BY name ASC"
 
